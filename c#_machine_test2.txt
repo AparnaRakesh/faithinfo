@@ -1,0 +1,129 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAssignment
+{
+ class BankTransactions
+    {
+        public int balance;
+        public string name;
+        public int accountNumber;
+        public string accType;
+        //depositing money
+        public void Depositing(int money)
+        {
+            if (money >= 50000)
+            {
+                Console.WriteLine("Enter your PAN Card number");
+                int PAN = Convert.ToInt32(Console.ReadLine());
+                balance = balance + money;
+                Console.WriteLine($"Balance after deposit: " + balance);
+            }
+            else
+            {
+                balance = balance + money;
+                Console.WriteLine($"Balance after deposit: " + balance);
+            }
+        }
+        public void Withdraw(int money)
+
+        {
+
+            if (money + 1000 < balance)
+            {
+                balance = balance - money;
+                Console.WriteLine($"Balance after withdraw: " + balance);
+            }
+            else
+            {
+                Console.WriteLine("SORRY!!! Insufficient funds");
+            }
+ }
+        public void Showbalance()
+        {
+            Console.WriteLine($"Your balence amount is:- " + balance);
+        }
+        public void AddNewCustomer(int accountNumber, string name, string accType, int bal)
+        {
+            this.accountNumber = accountNumber;
+            this.name = name;
+            this.accType = accType;
+            balance = bal;
+
+        }
+        public void display()
+        {
+            Console.WriteLine($"Account number-------- " + accountNumber);
+            Console.WriteLine($"Customer name--------- " + name);
+            Console.WriteLine($"Account type--------- " + accType);
+            Console.WriteLine($"Available balance---- " + balance);
+        }
+
+        public void TransferringMoney()
+        {
+            Console.WriteLine("Enter Account number ");
+            int TAccountNumber = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the Account number to which money should transfer:+ ");
+            int TTAccountNumber = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter amount to transfer");
+            int Tamount = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Transferred Amount Successfully");
+
+        }
+
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BankTransactions bank1 = new BankTransactions();
+            bank1.AddNewCustomer(1, "Aparna", "saving", 10000);
+            //
+            //bank1.Depositing(3000);
+            int choice;
+
+            do
+            {
+                Console.WriteLine("Enter the option \n\n1-----------Do you want to Deposit");
+                Console.WriteLine("2-----------Do you want to Withdraw");
+                Console.WriteLine("3-----------Do you want to Show balance");
+                Console.WriteLine("4-----------Transferring Money from One Account to Another account");
+                Console.WriteLine("\n0-----------Press 0 and exit....Thank you");
+                choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the amount to deposit:- ");
+                        int d = int.Parse(Console.ReadLine());
+
+
+                        bank1.Depositing(d);
+                        break;
+                    case 2:
+                        
+                        bank1.display();
+                        bank1.Showbalance();
+                        Console.WriteLine("\nEnter the amount to withdraw");
+                        int w = int.Parse(Console.ReadLine());
+                        bank1.Withdraw(w);
+                        break;
+                    case 3:
+                        bank1.Showbalance();
+                        break;
+                    case 4:
+                        bank1.TransferringMoney();
+                        break;
+                }
+
+            } while (choice != 0);
+            Console.ReadKey();
+        }
+    }
+
+}
